@@ -11,5 +11,7 @@ endif()
 
 project ("ModernCpp")
 
+set(CMAKE_CXX_STANDARD 20)
+
 # 包含子项目。
 add_subdirectory ("C++11")
