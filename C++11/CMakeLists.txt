@@ -13,3 +13,4 @@ add_executable (12_move_constructor_assignment				"12_move_constructor_assignmen
 add_executable (13_noexcept									"13_noexcept.cpp")
 add_executable (14_override_final							"14_override_final.cpp")
 add_executable (15_range_for								"15_range_for.cpp")
+add_executable (16_rvalue_reference							"16_rvalue_reference.cpp")
