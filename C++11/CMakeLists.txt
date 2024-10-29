@@ -10,3 +10,4 @@ add_executable (09_extern_template							"09_extern_template.cpp" "09_extern_tem
 add_executable (10_lambda									"10_lambda.cpp")
 add_executable (11_long_long								"11_long_long.cpp")
 add_executable (12_move_constructor_assignment				"12_move_constructor_assignment.cpp")
+add_executable (13_noexcept									"13_noexcept.cpp")
