@@ -31,7 +31,7 @@ using myVector = std::vector<T>;
 
 // typedef 不可以定义模板别名
 // typedef std::vector<T> myVector; // error
-typedef std::vector<int> myVector; // ok，typedef只能定义具体类型的别名
+//typedef std::vector<int> myVector; // ok，typedef只能定义具体类型的别名
 
 // 2、using更清晰，更直观
 typedef std::pair<int, std::vector<std::string>> PairInt; // typedef不直观
@@ -45,8 +45,8 @@ using PairInt = std::pair<int, std::vector<std::string>>; // using更直观
 typedef int *IntPtr; // IntPtr 是指向int的指针
 IntPtr a, b; // a, b 都是指向int的指针
 
-#define IntPtr int * // IntPtr 是int的指针
-IntPtr a, b; // a 是int的指针，b 是int，不符合预期
+//#define IntPtr int * // IntPtr 是int的指针
+//IntPtr a, b; // a 是int的指针，b 是int，不符合预期
 
 // 4、typedef具有作用域限制，define没有作用域限制，只要宏被定义，它在整个文件中都有效，直到#undef
 
