@@ -22,3 +22,4 @@ add_executable (21_type_aliases                             "21_type_aliases.cpp
 add_executable (22_list_initialization                      "22_list_initialization.cpp")
 add_executable (23_user_defined_literals                    "23_user_defined_literals.cpp")
 add_executable (24_string_literal                           "24_string_literal.cpp")
+add_executable (25_alignof_alignas                          "25_alignof_alignas.cpp")
