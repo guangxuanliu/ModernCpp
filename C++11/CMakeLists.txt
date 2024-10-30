@@ -25,3 +25,4 @@ add_executable (24_string_literal                           "24_string_literal.c
 add_executable (25_alignof_alignas                          "25_alignof_alignas.cpp")
 add_executable (26_mbstowcs_wcstombs                        "26_mbstowcs_wcstombs.cpp")
 add_executable (27_function                                 "27_function.cpp")
+add_executable (28_chrono                                   "28_chrono.cpp")
