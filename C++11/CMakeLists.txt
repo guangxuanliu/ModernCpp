@@ -24,3 +24,4 @@ add_executable (23_user_defined_literals                    "23_user_defined_lit
 add_executable (24_string_literal                           "24_string_literal.cpp")
 add_executable (25_alignof_alignas                          "25_alignof_alignas.cpp")
 add_executable (26_mbstowcs_wcstombs                        "26_mbstowcs_wcstombs.cpp")
+add_executable (27_function                                 "27_function.cpp")
