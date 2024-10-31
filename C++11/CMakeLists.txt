@@ -27,3 +27,4 @@ add_executable (26_mbstowcs_wcstombs                        "26_mbstowcs_wcstomb
 add_executable (27_function                                 "27_function.cpp")
 add_executable (28_chrono                                   "28_chrono.cpp")
 add_executable (29_smart_pointer                            "29_smart_pointer.cpp")
+add_executable (30_thread                                   "30_thread.cpp")

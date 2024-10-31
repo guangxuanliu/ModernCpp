@@ -1,5 +1,8 @@
 # 待学习
 
-字符串转换函数
+## C++11
+- thread，看书《C++并发编程实战》第二版， https://github.com/xiaoweiChen/CPP-Concurrency-In-Action-2ed-2019 ，注意不要看买的纸质书，翻译的一团糟。
 
-C++20 Modules
+
+## C++20 
+- Modules
