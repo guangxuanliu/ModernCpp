@@ -1,0 +1,10 @@
+add_executable (01_aggregate_member_initialization                      "01_aggregate_member_initialization.cpp")
+add_executable (02_binary_literals                                      "02_binary_literals.cpp")
+add_executable (03_deprecated                                           "03_deprecated.cpp")
+add_executable (04_digital_seperator                                    "04_digital_seperator.cpp")
+add_executable (05_function_return_type_deduction                       "05_function_return_type_deduction.cpp")
+add_executable (06_generic_lambda                                       "06_generic_lambda.cpp")
+add_executable (07_relaxed_constexpr                                    "07_relaxed_constexpr.cpp")
+add_executable (08_variable_template                                    "08_variable_template.cpp")
+add_executable (09_make_unique                                          "09_make_unique.cpp")
+

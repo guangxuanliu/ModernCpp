@@ -39,7 +39,7 @@ int main()
     * constexpr函数
     */
     // constexpr函数是指能用于常量表达式的函数
-    // constexpr函数的返回值和所有形参都必须是字面值类型, 且函数体中必须有且只有一条return语句
+    // constexpr函数的返回值和所有形参都必须是字面值类型, 且函数体中必须有且只有一条return语句（C++14中放宽了）
     // new_sz() 是一个 constexpr 函数
     constexpr int foo = new_sz();        // 正确：foo 是一个常量表达式
 
