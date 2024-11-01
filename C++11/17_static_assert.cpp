@@ -13,6 +13,7 @@
 * static_assert() 在 release 模式下 不会 被编译器优化掉
 * 因为static_assert是在编译器阶段检查的，所以它没有运行时开销
 * static_assert是关键字，所以不需要包含头文件
+* static_assert在C++17之前，必须传入第二个参数，用于描述性文本，C++17之后可以省略第二个参数
 * 
 * 最佳实践：
 * 尽量使用 static_assert()，因为它是在编译器阶段检查的，没有运行时开销
@@ -35,6 +36,7 @@ void func()
 
     static_assert(sizeof(int) == 4, "int must be 4 bytes");
     //static_assert(sizeof(long) == 8, "long must be 8 bytes"); // 编译错误
+    static_assert(sizeof(long long) == 8); // C++17之后，可以省略第二个参数
 }
 
 int main()

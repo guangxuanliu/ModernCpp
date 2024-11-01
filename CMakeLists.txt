@@ -13,9 +13,9 @@ project ("ModernCpp")
 
 set(CMAKE_CXX_STANDARD 20)
 
-# 包含子项目。
+
 add_subdirectory ("C++11")
 add_subdirectory ("C++14")
-
+add_subdirectory ("C++17")
 
 add_subdirectory ("Test")

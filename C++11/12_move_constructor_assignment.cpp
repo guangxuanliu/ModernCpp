@@ -43,8 +43,8 @@ public:
 std::string dots(10, '.');                  // 直接初始化
 std::string s(dots);                        // 拷贝初始化
 std::string s2 = dots;                      // 拷贝初始化
-std::string null_book = "9-999-99999-9";    // 拷贝初始化
-std::string nines = "999999999";            // 拷贝初始化
+std::string null_book = "9-999-99999-9";    // 拷贝初始化，但是编译器可能会优化为直接初始化
+std::string nines = "999999999";            // 拷贝初始化，但是编译器可能会优化为直接初始化
 
 // 2、拷贝赋值运算符
 // 定义：赋值运算符的左侧运算对象绑定到隐式的this参数，右侧运算对象作为显式参数传递
