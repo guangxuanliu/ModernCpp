@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <future>
 #include <coroutine>
 #include <chrono>
@@ -6,7 +6,7 @@
 #include <tuple>
 #include <utility>
 
-// µÈ´ı¶à¸öĞ­³ÌµÄ×éºÏ
+// ç­‰å¾…å¤šä¸ªåç¨‹çš„ç»„åˆ
 template<typename... Ts>
 struct WhenAll {
     std::tuple<Ts...> futures;
@@ -22,17 +22,17 @@ struct WhenAll {
 
         void await_suspend(std::coroutine_handle<> handle) {
             std::thread([this, handle] {
-                // µÈ´ıËùÓĞfutureÍê³É
+                // ç­‰å¾…æ‰€æœ‰futureå®Œæˆ
                 std::apply([](auto&... fs) {
-                    (fs.wait(), ...); // µÈ´ıËùÓĞÈÎÎñ
+                    (fs.wait(), ...); // ç­‰å¾…æ‰€æœ‰ä»»åŠ¡
                     }, whenAll->futures);
-                handle.resume(); // »Ö¸´Ğ­³Ì
+                handle.resume(); // æ¢å¤åç¨‹
                 }).detach();
         }
 
         auto await_resume() {
             return std::apply([](auto&... fs) {
-                return std::make_tuple(fs.get()...); // ·µ»ØËùÓĞ½á¹û
+                return std::make_tuple(fs.get()...); // è¿”å›æ‰€æœ‰ç»“æœ
                 }, whenAll->futures);
         }
     };
@@ -55,23 +55,23 @@ struct Task {
 Task exampleCoroutine() {
     std::cout << "Starting coroutine to await multiple async operations..." << std::endl;
 
-    // Æô¶¯¶à¸öÒì²½ÈÎÎñ
+    // å¯åŠ¨å¤šä¸ªå¼‚æ­¥ä»»åŠ¡
     auto future1 = std::async(std::launch::async, [] {
         std::this_thread::sleep_for(std::chrono::seconds(2));
-        return 1; // ·µ»Ø½á¹û1
+        return 1; // è¿”å›ç»“æœ1
         });
 
     auto future2 = std::async(std::launch::async, [] {
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        return 2; // ·µ»Ø½á¹û2
+        return 2; // è¿”å›ç»“æœ2
         });
 
     auto future3 = std::async(std::launch::async, [] {
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        return 3; // ·µ»Ø½á¹û3
+        return 3; // è¿”å›ç»“æœ3
         });
 
-    // Ê¹ÓÃ WhenAll µÈ´ıËùÓĞ½á¹û
+    // ä½¿ç”¨ WhenAll ç­‰å¾…æ‰€æœ‰ç»“æœ
     auto results = co_await WhenAll{ std::move(future1), std::move(future2), std::move(future3) };
 
     std::cout << "All async operations completed with results: "
@@ -82,6 +82,6 @@ Task exampleCoroutine() {
 
 int main() {
     exampleCoroutine();
-    std::this_thread::sleep_for(std::chrono::seconds(5)); // È·±£Ö÷Ïß³Ì²»½áÊø
+    std::this_thread::sleep_for(std::chrono::seconds(5)); // ç¡®ä¿ä¸»çº¿ç¨‹ä¸ç»“æŸ
     return 0;
 }
