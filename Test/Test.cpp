@@ -1,5 +1,6 @@
 #include <iostream>
 #include <new>
+#include <print>
 
 struct A {
     int value;

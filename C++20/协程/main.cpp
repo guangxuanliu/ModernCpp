@@ -34,7 +34,7 @@ struct Generator
         }
 
         // 调用协程函数时，在进入协程函数之前，会先进入该函数
-        // 函数返回suspend_always，代表协程初始化之后，先挂起
+        // 函数返回suspend_always，代表协程初始化之后，先挂起，等待调用resume()，调用方有机会在协程真正开始前做一些准备工作
         // 如果返回suspend_never，则协程初始化之后，不挂起，直接执行协程函数，直至遇到co_yield、co_return、co_await关键字
         std::suspend_always initial_suspend()
         {
@@ -43,15 +43,16 @@ struct Generator
         }
 
         // 当协程函数执行完毕，会进入该函数
-        // 函数返回suspend_always，代表协程结束之后，再次挂起
-        // 如果返回suspend_never，则协程结束之后，不挂起，直接结束协程
+        // 必须标记为noexcept，这是标准要求
+        // 函数返回suspend_always，代表协程结束之后，再次挂起，协程帧不会自动销毁，handle.done()会返回true，调用方需要手动调用 handle.destroy()或通过析构函数销毁
+        // 如果返回suspend_never，则协程结束之后，不挂起，直接自动销毁协程帧
         std::suspend_always final_suspend() noexcept
         {
             std::cout << "final_suspend()" << std::endl;
             return {};
         }
 
-        // 当协程函数遇到co_yield关键字时，会进入该函数
+        // 当协程函数中遇到co_yield关键字时，会进入该函数
         std::suspend_always yield_value(int value)
         {
             std::cout << "yield_value(" << value << ")" << std::endl;
@@ -59,7 +60,8 @@ struct Generator
             return {};
         }
         
-        // 当协程函数遇到co_return关键字时，或协程函数执行完毕后，会进入该函数
+        // 协程函数结束时，会进入该函数（当前例子的情况）
+        // 或协程函数遇到co_return时
         void return_void()
         {
             std::cout << "return_void()" << std::endl;
@@ -83,26 +85,30 @@ struct Generator
         std::cout << "~Generator()" << std::endl;
         handle.destroy();
     }
-    
-    int getNextValue()
+
+    bool next()
     {
-        std::cout << "getNextValue()" << std::endl;
         if (!handle.done())
         {
             handle.resume();
-            return handle.promise().current_value;
+            return !handle.done();  // resume后再检查是否到达了final_suspend
         }
-        return -1; // Indicate the end
+        return false;
     }
 
+    int value()
+    {
+        return handle.promise().current_value;
+    }
+    
     // 协程帧的句柄，主要用于访问底层的协程帧、恢复协程和释放协程帧。
     std::coroutine_handle<promise_type> handle;
 };
 
 // 只要包含co_yield、co_return、co_await关键字的函数，就是一个协程函数
-Generator counter(int max)
+Generator counter(int from, int to)
 {
-    for (int i = 0; i <= max; ++i)
+    for (int i = from; i <= to; ++i)
     {
         std::cout << "co_yield " << i << std::endl;
         co_yield i;
@@ -111,13 +117,10 @@ Generator counter(int max)
 
 int main()
 {
-    auto gen = counter(5);
-    while (true)
+    auto gen = counter(1, 5);
+    while (gen.next())
     {
-        int value = gen.getNextValue();
-        if (value == -1)
-            break;
-        std::cout << "Generated value: " << value << std::endl;
+        std::cout << "Generated value: " << gen.value() << std::endl;
     }
     return 0;
 }
